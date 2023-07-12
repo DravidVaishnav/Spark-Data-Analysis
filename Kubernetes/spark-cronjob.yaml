@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: spark-cronjob
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: spark-cron
+            image: spark:1.0
+            imagePullPolicy: Never
+            command:
+            - /bin/sh
+            - -c
+            - spark-submit /opt/pi.py
+          restartPolicy: Never

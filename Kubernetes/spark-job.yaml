@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spark-job
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - name: spark-pi
+        image: spark:1.0
+        imagePullPolicy: Never
+        command:
+        - /bin/sh
+        - -c
+        - spark-submit /opt/pi.py
+      restartPolicy: Never
